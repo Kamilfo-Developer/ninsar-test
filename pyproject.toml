@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ninsar-test"
+version = "0.1.0"
+description = ""
+authors = ["Kamil Biktimirov <Biktimirov.kamil@yandex.ru>"]
+readme = "README.md"
+packages = [{include = "ninsar_test"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.7.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
