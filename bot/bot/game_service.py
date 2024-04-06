@@ -43,7 +43,6 @@ class GuessResult:
 
 
 class GuessNumberGameService:
-
     def __init__(self, telegram_username: str):
         self.telegram_username = TelegramUsername(telegram_username)
 

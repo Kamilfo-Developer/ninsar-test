@@ -47,7 +47,6 @@ class PlayerExpirienceCalculator:
     def __calculate_player_expirience(
         self, player_expirience: int, player_level: int
     ) -> PlayerExpirience:
-
         new_expirience = player_expirience
 
         if new_expirience >= player_level * 100:
@@ -56,20 +55,14 @@ class PlayerExpirienceCalculator:
 
         return PlayerExpirience(new_expirience, player_level)
 
-    def answer_correct(
-        self, player_expirience: PlayerExpirience
-    ) -> PlayerExpirience:
-        new_expirience = (
-            player_expirience.expirience + self.EXPIRIENCE_PER_RIGHT_ANSWER
-        )
+    def answer_correct(self, player_expirience: PlayerExpirience) -> PlayerExpirience:
+        new_expirience = player_expirience.expirience + self.EXPIRIENCE_PER_RIGHT_ANSWER
 
         return self.__calculate_player_expirience(
             new_expirience, player_expirience.level
         )
 
-    def get_expirience_to_level_up(
-        self, player_expirience: PlayerExpirience
-    ) -> int:
+    def get_expirience_to_level_up(self, player_expirience: PlayerExpirience) -> int:
         return player_expirience.level * 100 - player_expirience.expirience
 
 
@@ -86,7 +79,6 @@ class GuessGame:
     def guess_number(
         self, guess_number: int, right_answer: int
     ) -> GuessNumberEstimation:
-
         if guess_number < right_answer:
             return GuessNumberEstimation.LESS
 
@@ -119,9 +111,7 @@ class PlayerDAO:
 
     def update_player(self, player_dto: PlayerDTO) -> None:
         try:
-            player = Player.objects.get(
-                telegram_username=player_dto.telegram_username
-            )
+            player = Player.objects.get(telegram_username=player_dto.telegram_username)
         except Player.DoesNotExist:
             raise NoSuchPlayer("Player not found")
 
@@ -144,10 +134,8 @@ class GuessGameService:
         self.__player_dao = player_dao
 
     def __win_game(self, player: PlayerDTO):
-        new_player_expirience = (
-            self.__player_expirience_calculator.answer_correct(
-                PlayerExpirience(player.expirience, player.level)
-            )
+        new_player_expirience = self.__player_expirience_calculator.answer_correct(
+            PlayerExpirience(player.expirience, player.level)
         )
 
         new_right_answer = self.__guess_game.create_new_right_answer()
@@ -190,9 +178,7 @@ class GuessGameService:
     ) -> GuessNumberEstimation:
         player = self.__player_dao.get_player_by_username(telegram_username)
 
-        estimation = self.__guess_game.guess_number(
-            number, player.right_answer
-        )
+        estimation = self.__guess_game.guess_number(number, player.right_answer)
 
         if estimation == GuessNumberEstimation.RIGHT_ANSWER:
             self.__win_game(player)

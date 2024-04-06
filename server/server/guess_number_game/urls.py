@@ -1,10 +1,6 @@
 from django.urls import path
 
-from .views import (
-    AnswerCreateAPIView,
-    PlayerCreateAPIView,
-    PlayerRetrieveAPIView,
-)
+from .views import AnswerCreateAPIView, PlayerCreateAPIView, PlayerRetrieveAPIView
 
 guess_number_game_urlpatterns = [
     path("api/v1/players", PlayerCreateAPIView.as_view()),

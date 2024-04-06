@@ -6,7 +6,6 @@ from aiogram.types import Message
 
 class TelegramUsername:
     def __init__(self, username: str):
-
         matches = re.match(
             r".*\B@(?=\w{5,32}\b)[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*.*", username
         )
@@ -20,7 +19,6 @@ class TelegramUsername:
 
 class IntegersRangeFilter(Filter):
     def __init__(self, lower_bound: int, upper_bound: int) -> None:
-
         if lower_bound > upper_bound:
             raise ValueError(
                 "Lower bound should be lower than or equal to higher bound"

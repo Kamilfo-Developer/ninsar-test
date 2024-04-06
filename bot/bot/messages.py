@@ -33,15 +33,11 @@ class Messages:
     def get_right_answer_message(self) -> str:
         return "Угадал! Впрочем, я загадал новое число. Сможешь угадать? :3"
 
-    def get_incorrect_input_message(
-        self, lower_bound: int, higher_bound: int
-    ) -> str:
+    def get_incorrect_input_message(self, lower_bound: int, higher_bound: int) -> str:
         return (
             f"Вводить можно только целые числа "
             f"в диапазоне от {lower_bound} до {higher_bound}."
         )
 
     def get_missing_username_message(self) -> str:
-        return (
-            "У тебя нет ника в Телеграме, создай его и тогда сможешь сыграть!"
-        )
+        return "У тебя нет ника в Телеграме, создай его и тогда сможешь сыграть!"

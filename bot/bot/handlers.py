@@ -33,9 +33,7 @@ async def start_handler(message: Message):
         await message.answer(messages.get_user_already_exists_message())
         return
 
-    await message.answer(
-        messages.get_start_message(message.from_user.full_name)
-    )
+    await message.answer(messages.get_start_message(message.from_user.full_name))
 
 
 @dp.message(Command("progress"))

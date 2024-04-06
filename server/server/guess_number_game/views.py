@@ -4,11 +4,7 @@ from rest_framework.response import Response
 
 from .dependencies import get_guess_game_service
 from .models import Player
-from .serializers import (
-    AnswerSerializer,
-    PlayerCreateSerializer,
-    PlayerSerializer,
-)
+from .serializers import AnswerSerializer, PlayerCreateSerializer, PlayerSerializer
 from .services import GuessNumberEstimation, NoSuchPlayer, PlayerAlreadyExists
 
 # Create your views here.
@@ -29,9 +25,7 @@ class PlayerCreateAPIView(generics.CreateAPIView):
         guess_game_service = get_guess_game_service()
 
         try:
-            guess_game_service.create_new_player(
-                player_data["telegram_username"]
-            )
+            guess_game_service.create_new_player(player_data["telegram_username"])
         except PlayerAlreadyExists:
             return Response({"error": "Player already exists"}, status=409)
 
@@ -45,9 +39,7 @@ class PlayerRetrieveAPIView(generics.RetrieveAPIView):
         guess_game_service = get_guess_game_service()
 
         try:
-            player_progress_dto = guess_game_service.get_progress(
-                telegram_username
-            )
+            player_progress_dto = guess_game_service.get_progress(telegram_username)
 
             return Response(
                 {
@@ -60,9 +52,7 @@ class PlayerRetrieveAPIView(generics.RetrieveAPIView):
             )
 
         except NoSuchPlayer:
-            return Response(
-                {"error": "No user with such username"}, status=404
-            )
+            return Response({"error": "No user with such username"}, status=404)
 
 
 class AnswerCreateAPIView(generics.CreateAPIView):
